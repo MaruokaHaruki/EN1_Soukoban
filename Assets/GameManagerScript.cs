@@ -8,14 +8,12 @@ public class GameManagerScript : MonoBehaviour {
 
     ///メソッドの宣言
     //配列の出力
-    void PrintArray()
-    {
+    void PrintArray() {
         //一行にまとめる
         string debugText = "";
 
         //要素数を1つずつ出力
-        for (int i = 0; i < map.Length; i++)
-        {
+        for (int i = 0; i < map.Length; i++) {
             debugText += map[i].ToString() + ",";
         }
 
@@ -24,12 +22,9 @@ public class GameManagerScript : MonoBehaviour {
     }
 
     //プレイヤーの配列取得
-    int GetPlayerIndex()
-    {
-        for (int i = 0; i < map.Length; i++)
-        {
-            if (map[i] == 1)
-            {
+    int GetPlayerIndex() {
+        for (int i = 0; i < map.Length; i++) {
+            if (map[i] == 1) {
                 return i;
             }
         }
@@ -37,10 +32,8 @@ public class GameManagerScript : MonoBehaviour {
     }
 
     //プレイヤーの移動不可
-    bool MoveNumber(int number, int moveFrom, int moveTo)
-    {
-        if (moveTo < 0 || moveTo >= map.Length)
-        {
+    bool MoveNumber(int number, int moveFrom, int moveTo) {
+        if (moveTo < 0 || moveTo >= map.Length) {
             return false;
         }
         map[moveTo] = number;
@@ -50,8 +43,7 @@ public class GameManagerScript : MonoBehaviour {
 
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         //配列の実体の作成と初期化
         map = new int[] { 0, 0, 0, 1, 0, 0, 0, 0, 0 };
 
@@ -60,12 +52,10 @@ public class GameManagerScript : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
 
         //右矢印キー入力
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
+        if (Input.GetKeyDown(KeyCode.RightArrow)) {
             //見つからなかった場合に-1で初期化
             int playerIndex = GetPlayerIndex();
 
@@ -77,10 +67,8 @@ public class GameManagerScript : MonoBehaviour {
 
         }
 
-
         //左矢印キー入力
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
             //見つからなかった場合に-1で初期化
             int playerIndex = GetPlayerIndex();
 
@@ -91,9 +79,6 @@ public class GameManagerScript : MonoBehaviour {
             PrintArray();
 
         }
-
-
-
 
     }
 }
