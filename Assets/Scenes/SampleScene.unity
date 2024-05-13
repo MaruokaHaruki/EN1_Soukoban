@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 0}
+  boxPrefab: {fileID: 0}
 --- !u!114 &960561238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,6 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 2835727182756059481, guid: 6208d2d6bf50a12459e2e2274879c69e, type: 3}
+  boxPrefab: {fileID: 1441598035223024550, guid: 0992c4b549c3f4f459a81a2ebcc37f7b, type: 3}
 --- !u!4 &960561239
 Transform:
   m_ObjectHideFlags: 0

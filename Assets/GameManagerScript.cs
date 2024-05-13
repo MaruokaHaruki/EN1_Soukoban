@@ -23,9 +23,11 @@ public class GameManagerScript : MonoBehaviour {
 
         //mapの初期化
         map = new int[,] {
-            {1,0,2,0,0,},
+            {1,0,0,0,0,},
             {0,0,2,0,0,},
             {0,0,2,0,0,},
+            {0,0,2,0,0,},
+            {0,0,0,0,0,},
             };
 
         //ゲーム管理用配列
