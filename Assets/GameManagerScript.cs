@@ -9,6 +9,10 @@ public class GameManagerScript : MonoBehaviour {
     //ゲームオブジェクトの宣言
     public GameObject playerPrefab;
     public GameObject boxPrefab;
+    public GameObject goalPrefub;
+
+    //ゴールテキスト
+    public GameObject clearText;
 
     ///2次元配列の宣言
     int[,] map;
@@ -178,8 +182,14 @@ public class GameManagerScript : MonoBehaviour {
             }
         }
 
+        //---------------------------------
+        //ゴール判定
+        //---------------------------------
         if (IsCleard()) {
+            //デバックログ
             Debug.Log("Clear!!!");
+            //クリアテキストの有効化
+            clearText.SetActive(true);
         }
 
 
