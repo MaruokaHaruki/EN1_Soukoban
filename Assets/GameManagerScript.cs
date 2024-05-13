@@ -16,6 +16,7 @@ public class GameManagerScript : MonoBehaviour {
     GameObject[,] field;
 
 
+
     ///---------------------------------
     //2次元配列処理
     ///---------------------------------
@@ -23,11 +24,11 @@ public class GameManagerScript : MonoBehaviour {
 
         //mapの初期化
         map = new int[,] {
-            {1,0,0,0,0,},
+            {1,0,0,0,3,},
             {0,0,2,0,0,},
             {0,0,2,0,0,},
             {0,0,2,0,0,},
-            {0,0,0,0,0,},
+            {3,0,0,0,3,},
             };
 
         //ゲーム管理用配列
@@ -35,7 +36,7 @@ public class GameManagerScript : MonoBehaviour {
 
             
         //デバック用テキスト
-        string debugText = "";
+        string debugText = "起動完了";
 
         //２次元配列の情報を出力
         for (int y = 0; y < map.GetLength(0); y++) {
@@ -56,6 +57,7 @@ public class GameManagerScript : MonoBehaviour {
     }
 
 
+
     //---------------------------------
     //プレイヤーの配列取得
     //---------------------------------
@@ -69,6 +71,7 @@ public class GameManagerScript : MonoBehaviour {
         }
         return new Vector2Int(-1, -1);
     }
+
 
 
     //---------------------------------
@@ -95,6 +98,39 @@ public class GameManagerScript : MonoBehaviour {
         field[moveFrom.y, moveFrom.x] = null;
         return true;
     }
+
+
+
+    ///---------------------------------
+    //クリア判定
+    //---------------------------------
+    bool IsCleard() {
+        //Vector2Int型の可変等配列の作成
+        List<Vector2Int> goals = new List<Vector2Int>();
+        //ゴールの場所を探す
+        for(int y = 0; y< map.GetLength(1); y++) {
+            for(int x = 0; x< map.GetLength(0); x++) {
+                //格納が処が否かを判断
+                if (map[y,x] == 3) {
+                    //格納場所のインデックスを控えておく
+                    goals.Add(new Vector2Int(x, y));
+                }
+            }
+        }
+
+        //要素数はgaols.countで取得
+        for(int i = 0; i < goals.Count; i++) {
+            GameObject f = field[goals[i].y,goals[i].x];
+            if(f == null || f.tag != "Box") {
+                //一つでもなかったら条件未達成
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+
 
 
     ///---------------------------------
@@ -142,10 +178,11 @@ public class GameManagerScript : MonoBehaviour {
             }
         }
 
+        if (IsCleard()) {
+            Debug.Log("Clear!!!");
+        }
 
 
     }
-
-
     //end
 }
