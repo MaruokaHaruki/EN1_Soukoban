@@ -33,7 +33,7 @@ public class GameManagerScript : MonoBehaviour {
         //ゲーム管理用配列
         field = new GameObject[map.GetLength(0), map.GetLength(1)];
 
-
+            
         //デバック用テキスト
         string debugText = "";
 
