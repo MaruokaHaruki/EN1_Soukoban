@@ -10,7 +10,7 @@ public class GameManagerScript : MonoBehaviour {
     public GameObject playerPrefab;
     public GameObject boxPrefab;
     public GameObject goalPrefub;
-
+    public GameObject particlePrefub;
     //ゴールテキスト
     public GameObject clearText;
 
@@ -19,13 +19,13 @@ public class GameManagerScript : MonoBehaviour {
 
     GameObject[,] field;
 
-
-
     ///---------------------------------
     //2次元配列処理
     ///---------------------------------
     void Start() {
-
+        //解像度そウィンドウモード
+        Screen.SetResolution(1280, 720, false);
+         
         //mapの初期化
         map = new int[,] {
             {1,0,0,0,3,},
@@ -194,8 +194,6 @@ public class GameManagerScript : MonoBehaviour {
             //クリアテキストの有効化
             clearText.SetActive(true);
         }
-
-
     }
     //end
 }
