@@ -38,7 +38,7 @@ public class GameManagerScript : MonoBehaviour {
         //ゲーム管理用配列
         field = new GameObject[map.GetLength(0), map.GetLength(1)];
 
-            
+
         //デバック用テキスト
         string debugText = "起動完了";
 
@@ -52,7 +52,7 @@ public class GameManagerScript : MonoBehaviour {
                 if (map[y, x] == 2) {
                     field[y, x] = Instantiate(boxPrefab, new Vector3(x - map.GetLength(1) / 2 + 0.5f, -y + map.GetLength(0) / 2 - 0.5f, 0), Quaternion.identity);
                 }
-                if (map[y, x] ==3) {
+                if (map[y, x] == 3) {
                     field[y, x] = Instantiate(goalPrefub, new Vector3(x - map.GetLength(1) / 2 + 0.5f, -y + map.GetLength(0) / 2 - 0.5f, 0.01f), Quaternion.identity);
                 }
 
@@ -91,7 +91,7 @@ public class GameManagerScript : MonoBehaviour {
 
         //配列街参照防止
         //Boxタグを持っていたら再起処理
-        if (field[moveTo.y,moveTo.x] != null && field[moveTo.y, moveTo.x].tag == "Box") {
+        if (field[moveTo.y, moveTo.x] != null && field[moveTo.y, moveTo.x].tag == "Box") {
             Vector2Int velocity = moveTo - moveFrom;
             bool success = MovePlayer(moveTo, moveTo + velocity);
             if (!success) { return false; }
@@ -99,7 +99,10 @@ public class GameManagerScript : MonoBehaviour {
 
 
         //ゲームオブジェクトの座標を変更
-        field[moveFrom.y, moveFrom.x].transform.position = new Vector3(moveTo.x - map.GetLength(1) / 2 + 0.5f, -moveTo.y + map.GetLength(0) / 2 - 0.5f, 0);
+        //field[moveFrom.y, moveFrom.x].transform.position = new Vector3(moveTo.x - map.GetLength(1) / 2 + 0.5f, -moveTo.y + map.GetLength(0) / 2 - 0.5f, 0);
+        Vector3 moveToPosition = new Vector3(moveTo.x - map.GetLength(1) / 2 + 0.5f, -moveTo.y + map.GetLength(0) / 2 - 0.5f, 0);
+        field[moveFrom.y, moveFrom.x].GetComponent<Move>().MoveTo(moveToPosition);
+
         //移動処理
         field[moveTo.y, moveTo.x] = field[moveFrom.y, moveFrom.x];
         field[moveFrom.y, moveFrom.x] = null;
@@ -115,10 +118,10 @@ public class GameManagerScript : MonoBehaviour {
         //Vector2Int型の可変等配列の作成
         List<Vector2Int> goals = new List<Vector2Int>();
         //ゴールの場所を探す
-        for(int y = 0; y< map.GetLength(1); y++) {
-            for(int x = 0; x< map.GetLength(0); x++) {
+        for (int y = 0; y < map.GetLength(1); y++) {
+            for (int x = 0; x < map.GetLength(0); x++) {
                 //格納が処が否かを判断
-                if (map[y,x] == 3) {
+                if (map[y, x] == 3) {
                     //格納場所のインデックスを控えておく
                     goals.Add(new Vector2Int(x, y));
                 }
@@ -126,18 +129,15 @@ public class GameManagerScript : MonoBehaviour {
         }
 
         //要素数はgaols.countで取得
-        for(int i = 0; i < goals.Count; i++) {
-            GameObject f = field[goals[i].y,goals[i].x];
-            if(f == null || f.tag != "Box") {
+        for (int i = 0; i < goals.Count; i++) {
+            GameObject f = field[goals[i].y, goals[i].x];
+            if (f == null || f.tag != "Box") {
                 //一つでもなかったら条件未達成
                 return false;
             }
         }
         return true;
     }
-
-
-
 
 
     ///---------------------------------
